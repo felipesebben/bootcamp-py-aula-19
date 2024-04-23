@@ -1,15 +1,15 @@
-FROM python:3.12-slim
+FROM python:3.12
 
-# Instalar poetry
+# Instalando o Poetry
 RUN pip install poetry
 
-# Copiar o conteúdo do diretório atual para o container
+# Copiar o conteúdo do diretório atual para o contêiner
 COPY . /src
 
 # Definir o diretório de trabalho
 WORKDIR /src
 
-# Instalar as dependências
+# Instalar as dependências do projeto com Poetry
 RUN poetry install
 
 # Expor a porta em que a aplicação estará escutando
