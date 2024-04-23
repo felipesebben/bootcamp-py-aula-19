@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 import src.models as models
 import src.database as database
 from typing import List, Union
-from schema import Item, ItemBase, ItemCreate
+from src.schema import Item, ItemBase, ItemCreate
 
 app = FastAPI()
 
