@@ -11,7 +11,7 @@ models.Base.metadata.create_all(bind=database.engine)
 
 @app.post("/items/", response_model=Item)
 def create_item(item: ItemCreate, db: Session = Depends(database.get_db)):
-    db_item = models.Item(**item.model_dump())
+    db_item = models.Item(**item.dict())
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
@@ -34,7 +34,7 @@ def update_item(item_id: int, item: ItemCreate, db: Session = Depends(database.g
     db_item = db.query(models.Item).filter(models.Item.id == item_id).first()
     if db_item is None:
         raise HTTPException(status_code=404, detail="Item not found")
-    for key, value in item.model_dump().items():
+    for key, value in item.dict().items():
         setattr(db_item, key, value)
     db.commit()
     db.refresh(db_item)
